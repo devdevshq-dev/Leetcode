@@ -2,9 +2,7 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         vector<int> sortedSet;
-        unordered_set<int> s;
-        for (auto x: nums) s.insert(x);
-        for (auto x: s) sortedSet.push_back(x);
+        for (auto x: nums) sortedSet.push_back(x);
         sort(sortedSet.begin(), sortedSet.end());
         int maxLen = 0;
         int len = 1;
@@ -13,6 +11,10 @@ public:
         while (i < n) {
             if (sortedSet[i] == sortedSet[i-1]+1) {
                 len += 1;
+            } else if(sortedSet[i] == sortedSet[i-1]) {
+                maxLen = max(len, maxLen);
+                i++;
+                continue;
             } else {
                 len = 1;
             }
